@@ -3,7 +3,7 @@ const _        = require('lodash');
 const axios    = require('axios');
 const config   = require('./config.json');
 
-exports.getLatestChromeVersion = function() {
+function getLatestChromeVersion() {
   return axios
     .get('https://omahaproxy.appspot.com/all.json')
     .then(function(resp) {
@@ -13,7 +13,7 @@ exports.getLatestChromeVersion = function() {
     });
 };
 
-exports.postToSlack = function(version) {
+function postToSlack(version) {
   var message = 'Latest stable cros version: ' + version;
   var data = { text: message };
   var options = { headers: { 'Content-Type': 'application/json' }};
@@ -25,9 +25,8 @@ exports.postToSlack = function(version) {
 };
 
 exports.handler = function(event, context) {
-  exports
-    .getLatestChromeVersion()
-    .then(exports.postToSlack)
-    .then(context.succeed)
-    .catch(context.fail);
+  getLatestChromeVersion()
+  .then(postToSlack)
+  .then(context.succeed)
+  .catch(context.fail);
 };
