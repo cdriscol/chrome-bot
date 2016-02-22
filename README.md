@@ -18,6 +18,8 @@ You'll need to create a `config.json` file in the root of the project that conta
 ```bash
 $ aws configuration
 ```
+* Setup an event source for the lambda function
+ * _CloudWatch Events - Schedule_ will allow cron expressions
 
 ### deploying
 Run the deploy script
