@@ -32,6 +32,8 @@ exports.handler = function(event, context) {
     getLatestChromeVersion()
   ])
   .spread(function(lastVersion, currentVersion) {
+    console.log('lastVersion:', lastVersion);
+    console.log('currentVersion:', currentVersion);
     if(lastVersion !== currentVersion) {
       return postToSlack(currentVersion)
         .then(function() {
